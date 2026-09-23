@@ -2370,5 +2370,25 @@ input {
         grid-template-columns: 1fr;
     }
 }
+/* =========================================================
+   CLICKABLE SERVICE CARD
+========================================================= */
+
+.service-card {
+    cursor: pointer;
+}
+
+.service-card-link {
+    margin-top: auto;
+
+    color: #1769e0;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.service-card:hover .service-card-link {
+    text-decoration: underline;
+}
 
 
