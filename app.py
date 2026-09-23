@@ -10,6 +10,11 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/services/electrical")
+def electrical_services():
+    return render_template("electrical.html")
+
+
 @app.route("/ping")
 def ping():
     return "SERVICE PROJECT is running!"
