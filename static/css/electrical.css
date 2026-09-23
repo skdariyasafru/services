@@ -1,7 +1,7 @@
 /* =========================================================
    SERVICE PROJECT
    ELECTRICAL SERVICES PAGE
-   Only Electrical page styles
+   Compact Version
 ========================================================= */
 
 
@@ -12,7 +12,7 @@
 .electrical-page {
     background: #f7f9fc;
     min-height: 600px;
-    padding: 20px 0 35px;
+    padding: 16px 0 28px;
 }
 
 
@@ -23,9 +23,9 @@
 .electrical-breadcrumb {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
 
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     color: #8a95a5;
     font-size: 10px;
@@ -46,14 +46,14 @@
 ========================================================= */
 
 .electrical-header {
-    min-height: 105px;
+    min-height: 82px;
 
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 
-    margin-bottom: 20px;
-    padding: 17px 22px;
+    margin-bottom: 15px;
+    padding: 12px 18px;
 
     background:
         radial-gradient(
@@ -68,12 +68,12 @@
         );
 
     border: 1px solid #dce8f6;
-    border-radius: 12px;
+    border-radius: 11px;
 }
 
 .electrical-header-icon {
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
 
     flex-shrink: 0;
 
@@ -81,28 +81,28 @@
     align-items: center;
     justify-content: center;
 
-    border-radius: 13px;
+    border-radius: 11px;
 
     background: #fff4d8;
 
-    font-size: 25px;
+    font-size: 21px;
 
-    box-shadow: 0 5px 14px rgba(30, 55, 90, 0.06);
+    box-shadow: 0 4px 10px rgba(30, 55, 90, 0.05);
 }
 
 .electrical-header h1 {
-    margin: 2px 0 4px;
+    margin: 1px 0 3px;
 
     color: #18243b;
 
-    font-size: 28px;
+    font-size: 25px;
     line-height: 1.1;
     font-weight: 800;
 }
 
 .electrical-header p {
     color: #718096;
-    font-size: 11px;
+    font-size: 10px;
 }
 
 
@@ -111,7 +111,7 @@
 ========================================================= */
 
 .electrical-title-row {
-    margin-bottom: 12px;
+    margin-bottom: 9px;
 }
 
 .electrical-title-row h2 {
@@ -119,13 +119,13 @@
 
     color: #18243b;
 
-    font-size: 22px;
-    line-height: 1.2;
+    font-size: 20px;
+    line-height: 1.15;
 }
 
 .electrical-title-row p {
     color: #7d899a;
-    font-size: 11px;
+    font-size: 10px;
 }
 
 
@@ -138,7 +138,7 @@
 
     grid-template-columns: repeat(4, minmax(0, 1fr));
 
-    gap: 9px;
+    gap: 8px;
 }
 
 
@@ -148,9 +148,9 @@
 
 .electrical-service-card {
     min-width: 0;
-    min-height: 185px;
+    min-height: 145px;
 
-    padding: 12px;
+    padding: 9px 10px;
 
     display: flex;
     flex-direction: column;
@@ -159,21 +159,22 @@
     background: #ffffff;
 
     border: 1px solid #e1e8f1;
-    border-radius: 10px;
+    border-radius: 9px;
 
-    box-shadow: 0 3px 10px rgba(25, 55, 95, 0.035);
+    box-shadow: 0 3px 9px rgba(25, 55, 95, 0.035);
 
-    transition: transform 0.2s ease,
-                box-shadow 0.2s ease,
-                border-color 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .electrical-service-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 
     border-color: #bcd2ed;
 
-    box-shadow: 0 9px 22px rgba(25, 65, 110, 0.08);
+    box-shadow: 0 7px 18px rgba(25, 65, 110, 0.08);
 }
 
 
@@ -182,20 +183,20 @@
 ========================================================= */
 
 .electrical-service-icon {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     background: #eaf3ff;
 
-    font-size: 19px;
+    font-size: 17px;
 }
 
 .electrical-service-icon.more {
@@ -203,7 +204,7 @@
 
     color: #657286;
 
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
 }
 
@@ -213,23 +214,25 @@
 ========================================================= */
 
 .electrical-service-card h3 {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 
     color: #29364b;
 
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
+
+    line-height: 1.2;
 }
 
 .electrical-service-card p {
-    min-height: 40px;
+    min-height: 32px;
 
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 
     color: #7f8b9c;
 
-    font-size: 9px;
-    line-height: 1.45;
+    font-size: 8px;
+    line-height: 1.35;
 }
 
 
@@ -240,21 +243,22 @@
 .electrical-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 3px;
 
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .electrical-tags span {
-    padding: 3px 6px;
+    padding: 2px 5px;
 
-    border-radius: 5px;
+    border-radius: 4px;
 
     background: #f3f6fa;
 
     color: #687588;
 
-    font-size: 8px;
+    font-size: 7px;
+    line-height: 1.2;
 }
 
 
@@ -264,7 +268,7 @@
 
 .electrical-book-btn {
     width: 100%;
-    min-height: 31px;
+    min-height: 27px;
 
     margin-top: auto;
 
@@ -272,12 +276,12 @@
     align-items: center;
     justify-content: center;
 
-    border-radius: 7px;
+    border-radius: 6px;
 
     background: #1769e0;
     color: #ffffff;
 
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
 
     transition: background 0.2s ease;
@@ -293,22 +297,22 @@
 ========================================================= */
 
 .electrical-info {
-    margin-top: 15px;
-    padding: 12px 15px;
+    margin-top: 12px;
+    padding: 10px 13px;
 
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
 
     background: #edf6ff;
 
     border: 1px solid #d5e5f8;
-    border-radius: 9px;
+    border-radius: 8px;
 }
 
 .electrical-info-icon {
-    width: 30px;
-    height: 30px;
+    width: 27px;
+    height: 27px;
 
     flex-shrink: 0;
 
@@ -321,7 +325,7 @@
     background: #1769e0;
     color: #ffffff;
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
 }
 
@@ -329,17 +333,18 @@
     margin-bottom: 1px;
 
     color: #29364b;
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .electrical-info p {
     color: #718096;
-    font-size: 9px;
+    font-size: 8px;
+    line-height: 1.35;
 }
 
 
 /* =========================================================
-   DESKTOP COMPACT
+   DESKTOP
 ========================================================= */
 
 @media (min-width: 1001px) {
@@ -375,11 +380,11 @@
     }
 
     .electrical-header {
-        padding: 15px;
+        padding: 12px;
     }
 
     .electrical-header h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
 }
@@ -392,7 +397,7 @@
 @media (max-width: 480px) {
 
     .electrical-page {
-        padding-top: 15px;
+        padding-top: 12px;
     }
 
     .electrical-service-grid {
@@ -400,21 +405,22 @@
     }
 
     .electrical-header {
-        gap: 10px;
+        gap: 9px;
     }
 
     .electrical-header-icon {
-        width: 46px;
-        height: 46px;
-        font-size: 21px;
+        width: 40px;
+        height: 40px;
+
+        font-size: 19px;
     }
 
     .electrical-header h1 {
-        font-size: 21px;
+        font-size: 20px;
     }
 
     .electrical-header p {
-        font-size: 10px;
+        font-size: 9px;
     }
 
 }
