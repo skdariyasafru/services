@@ -3,30 +3,82 @@
 {% block title %}Home - Service Project{% endblock %}
 
 {% block content %}
-<div class="service-card">
-    <div class="service-card-icon cooking-icon">🍳</div>
-    <h3>Cooking</h3>
-    <p>Daily Cooking, Meal Preparation &amp; Kitchen Assistance</p>
-    <a href="{{ url_for('cooking') }}">View Services →</a>
+<div class="service-grid">
+
+    <!-- Repair Services -->
+    <a href="#" class="service-card">
+        <div class="service-card-icon repair-icon">🛠</div>
+        <h3>Repair Services</h3>
+        <p>Mobile, Laptop, Appliances</p>
+        <span class="service-card-link">View Services →</span>
+    </a>
+
+
+    <!-- Home Services -->
+    <a href="#" class="service-card">
+        <div class="service-card-icon home-icon">🏠</div>
+        <h3>Home Services</h3>
+        <p>Cleaning, Painting, Pest Control</p>
+        <span class="service-card-link">View Services →</span>
+    </a>
+
+
+    <!-- Cooking -->
+    <a href="{{ url_for('cooking') }}" class="service-card">
+        <div class="service-card-icon cooking-icon">🍳</div>
+        <h3>Cooking</h3>
+        <p>Daily Cooking, Meal Preparation &amp; Kitchen Assistance</p>
+        <span class="service-card-link">View Services →</span>
+    </a>
+
+
+    <!-- Electrical -->
+    <a href="{{ url_for('electrical_services') }}" class="service-card">
+        <div class="service-card-icon electrical-icon">⚡</div>
+        <h3>Electrical</h3>
+        <p>Installation, Repair &amp; More</p>
+        <span class="service-card-link">View Services →</span>
+    </a>
+
+
+    <!-- Plumbing -->
+    <a href="#" class="service-card">
+        <div class="service-card-icon plumbing-icon">💧</div>
+        <h3>Plumbing</h3>
+        <p>Fast &amp; Reliable Plumbing</p>
+        <span class="service-card-link">View Services →</span>
+    </a>
+
+
+    <!-- AC Services -->
+    <a href="#" class="service-card">
+        <div class="service-card-icon ac-icon">❄</div>
+        <h3>AC Services</h3>
+        <p>Installation, Repair &amp; AMC</p>
+        <span class="service-card-link">View Services →</span>
+    </a>
+
+
+    <!-- Painting -->
+    <a href="#" class="service-card">
+        <div class="service-card-icon painting-icon">🎨</div>
+        <h3>Painting</h3>
+        <p>Interior &amp; Exterior Painting</p>
+        <span class="service-card-link">View Services →</span>
+    </a>
+
+
+    <!-- More Services -->
+    <a href="#" class="service-card">
+        <div class="service-card-icon more-icon">•••</div>
+        <h3>More Services</h3>
+        <p>Explore many other services</p>
+        <span class="service-card-link">View Services →</span>
+    </a>
+
 </div>
 
-<a href="{{ url_for('electrical_services') }}" class="service-card">
 
-    <div class="service-card-icon electrical-icon">
-        ⚡
-    </div>
-
-    <h3>Electrical</h3>
-
-    <p>
-        Installation, Repair &amp; More
-    </p>
-
-    <span class="service-card-link">
-        View Services →
-    </span>
-
-</a>
 <section class="hero-section">
     <div class="container hero-container">
         <div class="hero-content">
