@@ -8,6 +8,9 @@ app.config["SECRET_KEY"] = "service-project-development-key"
 @app.route("/")
 def home():
     return render_template("index.html")
+@app.route("/services/cooking")
+def cooking():
+    return render_template("cooking.html")
 
 
 @app.route("/services/electrical")
