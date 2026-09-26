@@ -3,6 +3,13 @@
 {% block title %}Home - Service Project{% endblock %}
 
 {% block content %}
+<div class="service-card">
+    <div class="service-card-icon cooking-icon">🍳</div>
+    <h3>Cooking</h3>
+    <p>Daily Cooking, Meal Preparation &amp; Kitchen Assistance</p>
+    <a href="{{ url_for('cooking') }}">View Services →</a>
+</div>
+
 <a href="{{ url_for('electrical_services') }}" class="service-card">
 
     <div class="service-card-icon electrical-icon">
