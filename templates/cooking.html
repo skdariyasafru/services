@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Cooking Services - Service Project{% endblock %}
+
+{% block content %}
+
+<section class="electrical-page">
+
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <div class="electrical-breadcrumb">
+            <a href="{{ url_for('home') }}">Home</a>
+            <span>›</span>
+            <span>Cooking Services</span>
+        </div>
+
+
+        <!-- Page Header -->
+        <div class="electrical-header">
+
+            <div class="electrical-header-icon">
+                🍳
+            </div>
+
+            <div>
+                <h1>Cooking Services</h1>
+                <p>
+                    Choose how you want to enjoy your food.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Title -->
+        <div class="electrical-title-row">
+            <h2>Choose a Service</h2>
+            <p>
+                Select an option below to continue.
+            </p>
+        </div>
+
+
+        <!-- Cooking Options -->
+        <div class="electrical-service-grid">
+
+
+            <!-- OPTION 1 -->
+            <div class="electrical-service-card">
+
+                <div class="electrical-service-icon">
+                    🍳
+                </div>
+
+                <h3>Prepare Food at Home</h3>
+
+                <p>
+                    Book a cook to come to your home and prepare
+                    fresh food according to your requirements.
+                </p>
+
+                <div class="electrical-tags">
+                    <span>Home Cook</span>
+                    <span>Fresh Food</span>
+                </div>
+
+                <a href="#" class="electrical-book-btn">
+                    Continue →
+                </a>
+
+            </div>
+
+
+            <!-- OPTION 2 -->
+            <div class="electrical-service-card">
+
+                <div class="electrical-service-icon">
+                    🥡
+                </div>
+
+                <h3>Food Delivery</h3>
+
+                <p>
+                    Order freshly prepared food and get it
+                    delivered conveniently to your doorstep.
+                </p>
+
+                <div class="electrical-tags">
+                    <span>Fresh Food</span>
+                    <span>Delivery</span>
+                </div>
+
+                <a href="#" class="electrical-book-btn">
+                    Continue →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
