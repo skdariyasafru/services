@@ -32,8 +32,38 @@
             <button class="location-btn" type="button">
                 <span>📍</span><span>Guntur</span><span>⌄</span>
             </button>
-            <a href="#" class="login-link"><span>♙</span><span>Login</span></a>
-            <a href="#" class="register-btn"><span>♙</span> Register</a>
+          {% if current_user.is_authenticated %}
+
+<a href="{{ url_for('login') }}" class="nav-login">
+    <span>♙</span> Login
+</a>
+
+<a href="{{ url_for('cart') }}" class="header-cart">
+    <span class="cart-icon">🛒</span>
+    <span>Cart</span>
+
+    {% if session.get('cart') %}
+        <span class="cart-badge">
+            {{ session.get('cart')|length }}
+        </span>
+    {% endif %}
+</a>
+
+<a href="{{ url_for('register') }}" class="register-btn">
+    Register
+</a>
+
+{% else %}
+
+<a href="{{ url_for('login') }}" class="nav-login">
+    <span>♙</span> Login
+</a>
+
+<a href="{{ url_for('register') }}" class="register-btn">
+    Register
+</a>
+
+{% endif %}
         </div>
     </div>
 </header>
