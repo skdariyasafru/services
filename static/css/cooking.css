@@ -1,0 +1,305 @@
+/* =========================================================
+   SERVICE PROJECT
+   COOKING SERVICES PAGE
+   Separate CSS - Cooking Module Only
+========================================================= */
+
+.cooking-page {
+    background: #f7f9fc;
+    min-height: 600px;
+    padding: 18px 0 40px;
+}
+
+/* Breadcrumb */
+.cooking-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: #7b8798;
+}
+
+.cooking-breadcrumb a {
+    color: #1769e0;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.cooking-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+.cooking-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 18px 22px;
+    margin-bottom: 20px;
+
+    background:
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(91, 157, 244, 0.15),
+            transparent 35%
+        ),
+        linear-gradient(110deg, #edf5ff, #f8fbff);
+
+    border: 1px solid #dce8f6;
+    border-radius: 12px;
+}
+
+.cooking-header-icon {
+    width: 56px;
+    height: 56px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff4d8;
+    border-radius: 13px;
+
+    font-size: 27px;
+    box-shadow: 0 5px 14px rgba(30, 55, 90, 0.06);
+}
+
+.cooking-header h1 {
+    margin: 0 0 4px;
+
+    color: #18243b;
+    font-size: 28px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.cooking-header p {
+    margin: 0;
+    color: #718096;
+    font-size: 12px;
+}
+
+/* Section heading */
+.cooking-title-row {
+    margin-bottom: 12px;
+}
+
+.cooking-title-row h2 {
+    margin: 0 0 3px;
+    color: #18243b;
+    font-size: 22px;
+}
+
+.cooking-title-row p {
+    margin: 0;
+    color: #7d899a;
+    font-size: 12px;
+}
+
+/* Options */
+.cooking-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+/* Option card */
+.cooking-card {
+    min-width: 0;
+    min-height: 190px;
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e8f1;
+    border-radius: 12px;
+
+    box-shadow: 0 3px 12px rgba(25, 55, 95, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.cooking-card:hover {
+    transform: translateY(-3px);
+    border-color: #bcd2ed;
+    box-shadow: 0 10px 25px rgba(25, 65, 110, 0.09);
+}
+
+/* Icon */
+.cooking-card-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 10px;
+
+    background: #fff4d8;
+    border-radius: 11px;
+
+    font-size: 23px;
+}
+
+.cooking-card.delivery .cooking-card-icon {
+    background: #eaf6ff;
+}
+
+/* Text */
+.cooking-card h3 {
+    margin: 0 0 6px;
+
+    color: #29364b;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.cooking-card p {
+    margin: 0 0 10px;
+
+    color: #718096;
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+/* Tags */
+.cooking-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+.cooking-tags span {
+    padding: 4px 8px;
+
+    border-radius: 5px;
+
+    background: #f3f6fa;
+    color: #687588;
+
+    font-size: 9px;
+}
+
+/* Continue button */
+.cooking-btn {
+    width: 100%;
+    min-height: 34px;
+
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #1769e0;
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: background 0.2s ease;
+}
+
+.cooking-btn:hover {
+    background: #0f57c4;
+}
+
+/* Information box */
+.cooking-info {
+    margin-top: 16px;
+    padding: 13px 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #edf6ff;
+
+    border: 1px solid #d5e5f8;
+    border-radius: 9px;
+}
+
+.cooking-info-icon {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #1769e0;
+    color: #ffffff;
+
+    font-size: 13px;
+}
+
+.cooking-info h3 {
+    margin: 0 0 2px;
+    color: #29364b;
+    font-size: 11px;
+}
+
+.cooking-info p {
+    margin: 0;
+    color: #718096;
+    font-size: 9px;
+}
+
+/* Tablet */
+@media (max-width: 700px) {
+    .cooking-options {
+        grid-template-columns: 1fr;
+    }
+
+    .cooking-header h1 {
+        font-size: 24px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .cooking-page {
+        padding-top: 14px;
+    }
+
+    .cooking-header {
+        padding: 15px;
+    }
+
+    .cooking-header-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+    }
+
+    .cooking-header h1 {
+        font-size: 21px;
+    }
+
+    .cooking-card {
+        min-height: 175px;
+        padding: 15px;
+    }
+}
