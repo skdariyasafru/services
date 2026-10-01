@@ -1,0 +1,353 @@
+{% extends "base.html" %}
+
+{% block title %}Food Menu - Service Project{% endblock %}
+
+{% block content %}
+
+<section class="cooking-menu-page">
+
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <div class="cooking-breadcrumb">
+            <a href="{{ url_for('home') }}">Home</a>
+            <span>›</span>
+            <a href="{{ url_for('cooking') }}">Cooking</a>
+            <span>›</span>
+            <span>Food Menu</span>
+        </div>
+
+
+        <!-- Header -->
+        <div class="cooking-menu-header">
+
+            <div class="cooking-menu-icon">
+                🍳
+            </div>
+
+            <div>
+                {% if service_type == "home" %}
+                    <div class="cooking-label">HOME COOKING</div>
+                    <h1>Choose Food to Prepare</h1>
+                    <p>Select the dishes you want prepared at your home.</p>
+                {% else %}
+                    <div class="cooking-label">FOOD DELIVERY</div>
+                    <h1>Choose Your Food</h1>
+                    <p>Select your food and add it to your cart.</p>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+        <!-- Menu Heading -->
+        <div class="cooking-menu-title">
+            <div>
+                <div class="section-label">FOOD MENU</div>
+                <h2>Popular Dishes</h2>
+                <p>Choose your dishes and add them to your cart.</p>
+            </div>
+
+            <a href="#" class="cooking-cart-button">
+                🛒 Cart <span id="cartCount">0</span>
+            </a>
+        </div>
+
+
+        <!-- Food Grid -->
+        <div class="cooking-food-grid">
+
+
+            <!-- Biryani -->
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍛
+                </div>
+
+                <div class="food-details">
+
+                    <h3>Chicken Biryani</h3>
+
+                    <p>
+                        Fragrant basmati rice with chicken and
+                        traditional spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>₹100</strong>
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            onclick="addToCart('Chicken Biryani', 100)">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Veg Biryani -->
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍚
+                </div>
+
+                <div class="food-details">
+
+                    <h3>Veg Biryani</h3>
+
+                    <p>
+                        Flavourful basmati rice with fresh vegetables
+                        and spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>₹80</strong>
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            onclick="addToCart('Veg Biryani', 80)">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Chicken Curry -->
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍗
+                </div>
+
+                <div class="food-details">
+
+                    <h3>Chicken Curry</h3>
+
+                    <p>
+                        Traditional chicken curry prepared with
+                        Indian spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>₹120</strong>
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            onclick="addToCart('Chicken Curry', 120)">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Paneer Curry -->
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🥘
+                </div>
+
+                <div class="food-details">
+
+                    <h3>Paneer Curry</h3>
+
+                    <p>
+                        Soft paneer cooked in a rich and tasty
+                        Indian gravy.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>₹100</strong>
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            onclick="addToCart('Paneer Curry', 100)">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Sambar -->
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍲
+                </div>
+
+                <div class="food-details">
+
+                    <h3>Sambar</h3>
+
+                    <p>
+                        South Indian style vegetable sambar
+                        with lentils and spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>₹60</strong>
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            onclick="addToCart('Sambar', 60)">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Dal Fry -->
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🥣
+                </div>
+
+                <div class="food-details">
+
+                    <h3>Dal Fry</h3>
+
+                    <p>
+                        Yellow dal cooked with onion, tomato
+                        and Indian spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>₹70</strong>
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            onclick="addToCart('Dal Fry', 70)">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Chapati -->
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🫓
+                </div>
+
+                <div class="food-details">
+
+                    <h3>Chapati</h3>
+
+                    <p>
+                        Fresh soft chapati prepared with
+                        whole wheat flour.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>₹15</strong>
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            onclick="addToCart('Chapati', 15)">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Rice -->
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍚
+                </div>
+
+                <div class="food-details">
+
+                    <h3>Plain Rice</h3>
+
+                    <p>
+                        Freshly cooked steamed rice.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong>₹50</strong>
+
+                        <button
+                            type="button"
+                            class="add-cart-btn"
+                            onclick="addToCart('Plain Rice', 50)">
+                            + Add
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+let cartCount = 0;
+
+function addToCart(name, price) {
+
+    cartCount++;
+
+    document.getElementById("cartCount").textContent = cartCount;
+
+    alert(name + " added to cart - ₹" + price);
+}
+
+</script>
+
+{% endblock %}
