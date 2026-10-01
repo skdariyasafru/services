@@ -1,157 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Service Project - Book reliable professional services easily.">
+
+    <meta name="description"
+          content="Service Project - Book reliable professional services easily.">
+
     <title>{% block title %}Service Project{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Page-specific CSS -->
     {% block extra_css %}{% endblock %}
 </head>
+
+
 <body>
 
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="site-header">
+
     <div class="container header-inner">
-        <a href="{{ url_for('home') }}" class="brand">
-            <div class="brand-icon">🛠</div>
-            <div class="brand-text">
-                <div class="brand-name">SERVICE <span>PROJECT</span></div>
-                <div class="brand-tagline">Your Service, Our Priority</div>
+
+        <!-- BRAND -->
+        <a href="{{ url_for('home.home') }}" class="brand">
+
+            <div class="brand-icon">
+                🛠
             </div>
+
+            <div class="brand-text">
+
+                <div class="brand-name">
+                    SERVICE <span>PROJECT</span>
+                </div>
+
+                <div class="brand-tagline">
+                    Your Service, Our Priority
+                </div>
+
+            </div>
+
         </a>
 
+
+        <!-- NAVIGATION -->
         <nav class="main-nav">
-            <a href="{{ url_for('home') }}" class="nav-link active">Home</a>
-            <a href="#" class="nav-link">Services</a>
-            <a href="#" class="nav-link">My Bookings</a>
-            <a href="#" class="nav-link">About</a>
-            <a href="#" class="nav-link">Contact</a>
+
+            <a href="{{ url_for('home.home') }}"
+               class="nav-link active">
+                Home
+            </a>
+
+            <a href="#" class="nav-link">
+                Services
+            </a>
+
+            <a href="#" class="nav-link">
+                My Bookings
+            </a>
+
+            <a href="#" class="nav-link">
+                About
+            </a>
+
+            <a href="#" class="nav-link">
+                Contact
+            </a>
+
         </nav>
 
+
+        <!-- RIGHT SIDE -->
         <div class="header-right">
+
+            <!-- LOCATION -->
             <button class="location-btn" type="button">
-                <span>📍</span><span>Guntur</span><span>⌄</span>
+
+                <span>📍</span>
+                <span>Guntur</span>
+                <span>⌄</span>
+
             </button>
-          {% if current_user.is_authenticated %}
 
-<a href="{{ url_for('login') }}" class="nav-login">
-    <span>♙</span> Login
-</a>
 
-<a href="{{ url_for('cart') }}" class="header-cart">
-    <span class="cart-icon">🛒</span>
-    <span>Cart</span>
+            <!-- LOGIN -->
+            <a href="#" class="nav-login">
+                <span>♙</span>
+                Login
+            </a>
 
-    {% if session.get('cart') %}
-        <span class="cart-badge">
-            {{ session.get('cart')|length }}
-        </span>
-    {% endif %}
-</a>
 
-<a href="{{ url_for('register') }}" class="register-btn">
-    Register
-</a>
+            <!-- CART -->
+            <a href="{{ url_for('cart.cart') }}"
+               class="header-cart">
 
-{% else %}
+                <span class="cart-icon">
+                    🛒
+                </span>
 
-<a href="{{ url_for('login') }}" class="nav-login">
-    <span>♙</span> Login
-</a>
+                <span>
+                    Cart
+                </span>
 
-<a href="{{ url_for('register') }}" class="register-btn">
-    Register
-</a>
+                {% if session.get('cart') %}
 
-{% endif %}
+                    <span class="cart-badge">
+                        {{ session.get('cart')|length }}
+                    </span>
+
+                {% endif %}
+
+            </a>
+
+
+            <!-- REGISTER -->
+            <a href="#"
+               class="register-btn">
+                Register
+            </a>
+
         </div>
+
     </div>
+
 </header>
 
+
+<!-- =========================================================
+     SEARCH
+========================================================= -->
+
 <section class="search-section">
+
     <div class="container search-container">
-        <button class="category-button" type="button">
-            <span class="category-icon">▦</span>
-            <span>All Services</span>
-            <span class="category-arrow">⌄</span>
+
+
+        <!-- CATEGORY -->
+        <button class="category-button"
+                type="button">
+
+            <span class="category-icon">
+                ▦
+            </span>
+
+            <span>
+                All Services
+            </span>
+
+            <span class="category-arrow">
+                ⌄
+            </span>
+
         </button>
 
+
+        <!-- SEARCH INPUT -->
         <div class="search-wrapper">
-            <span class="search-icon">⌕</span>
-            <input type="text" id="serviceSearch" name="q"
-                   placeholder="Search for a service (e.g. plumber, electrician, AC repair...)"
-                   autocomplete="off">
-            <div id="searchResults" class="search-results"></div>
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+            <input
+                type="text"
+                id="serviceSearch"
+                name="q"
+                placeholder="Search for a service (e.g. plumber, electrician, AC repair...)"
+                autocomplete="off"
+            >
+
+            <div id="searchResults"
+                 class="search-results">
+            </div>
+
         </div>
 
-        <button class="search-button" type="button" id="searchButton">
-            <span>⌕</span> Search
+
+        <!-- SEARCH BUTTON -->
+        <button
+            class="search-button"
+            type="button"
+            id="searchButton">
+
+            <span>⌕</span>
+            Search
+
         </button>
+
     </div>
+
 </section>
 
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
 <main>
-    {% block content %}{% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
 </main>
 
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
 <footer class="site-footer">
+
     <div class="container footer-grid">
+
+
+        <!-- FOOTER BRAND -->
         <div class="footer-brand">
-            <a href="{{ url_for('home') }}" class="footer-logo">
-                <span class="footer-logo-icon">🛠</span>
-                <span>SERVICE <b>PROJECT</b></span>
+
+            <a href="{{ url_for('home.home') }}"
+               class="footer-logo">
+
+                <span class="footer-logo-icon">
+                    🛠
+                </span>
+
+                <span>
+                    SERVICE <b>PROJECT</b>
+                </span>
+
             </a>
-            <p>Book reliable services easily and conveniently. We connect you with trusted professionals.</p>
+
+            <p>
+                Book reliable services easily and conveniently.
+                We connect you with trusted professionals.
+            </p>
+
+
             <div class="social-links">
-                <a href="#" aria-label="Facebook">f</a>
-                <a href="#" aria-label="Instagram">◎</a>
-                <a href="#" aria-label="YouTube">▶</a>
-                <a href="#" aria-label="Twitter">♥</a>
+
+                <a href="#" aria-label="Facebook">
+                    f
+                </a>
+
+                <a href="#" aria-label="Instagram">
+                    ◎
+                </a>
+
+                <a href="#" aria-label="YouTube">
+                    ▶
+                </a>
+
+                <a href="#" aria-label="Twitter">
+                    ♥
+                </a>
+
             </div>
+
         </div>
 
+
+        <!-- QUICK LINKS -->
         <div class="footer-column">
-            <h3>Quick Links</h3>
-            <a href="{{ url_for('home') }}">Home</a>
-            <a href="#">Services</a>
-            <a href="#">My Bookings</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact</a>
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="{{ url_for('home.home') }}">
+                Home
+            </a>
+
+            <a href="#">
+                Services
+            </a>
+
+            <a href="#">
+                My Bookings
+            </a>
+
+            <a href="#">
+                About Us
+            </a>
+
+            <a href="#">
+                Contact
+            </a>
+
         </div>
 
+
+        <!-- SUPPORT -->
         <div class="footer-column">
-            <h3>Support</h3>
-            <a href="#">Help Center</a>
-            <a href="#">FAQs</a>
-            <a href="#">Terms &amp; Conditions</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Contact Support</a>
+
+            <h3>
+                Support
+            </h3>
+
+            <a href="#">
+                Help Center
+            </a>
+
+            <a href="#">
+                FAQs
+            </a>
+
+            <a href="#">
+                Terms &amp; Conditions
+            </a>
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+            <a href="#">
+                Contact Support
+            </a>
+
         </div>
 
+
+        <!-- CONTACT -->
         <div class="footer-column contact-column">
-            <h3>Contact Us</h3>
-            <p><span>☎</span> +91 98765 43210</p>
-            <p><span>✉</span> support@serviceproject.com</p>
-            <p><span>📍</span> Guntur, Andhra Pradesh, India</p>
+
+            <h3>
+                Contact Us
+            </h3>
+
+            <p>
+                <span>☎</span>
+                +91 98765 43210
+            </p>
+
+            <p>
+                <span>✉</span>
+                support@serviceproject.com
+            </p>
+
+            <p>
+                <span>📍</span>
+                Guntur, Andhra Pradesh, India
+            </p>
+
         </div>
 
+
+        <!-- FOLLOW -->
         <div class="footer-column follow-column">
-            <h3>Follow Us</h3>
+
+            <h3>
+                Follow Us
+            </h3>
+
             <div class="footer-social">
-                <a href="#">f</a><a href="#">◎</a><a href="#">▶</a><a href="#">♥</a>
+
+                <a href="#">f</a>
+                <a href="#">◎</a>
+                <a href="#">▶</a>
+                <a href="#">♥</a>
+
             </div>
+
         </div>
+
     </div>
 
+
+    <!-- FOOTER BOTTOM -->
     <div class="footer-bottom">
+
         <div class="container footer-bottom-inner">
-            <span>© 2026 Service Project. All rights reserved.</span>
-            <span>Made <b>♥</b> for a better service experience</span>
+
+            <span>
+                © 2026 Service Project. All rights reserved.
+            </span>
+
+            <span>
+                Made <b>♥</b> for a better service experience
+            </span>
+
         </div>
+
     </div>
+
 </footer>
 
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-{% block extra_js %}{% endblock %}
+
+{% block extra_js %}
+{% endblock %}
+
 </body>
 </html>
