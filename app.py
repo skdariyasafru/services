@@ -18,6 +18,10 @@ def home():
 def cooking():
     return render_template("cooking.html")
 
+@app.route("/cart")
+def cart():
+    return render_template("cart.html")
+
 
 @app.route("/services/cooking/menu/<service_type>")
 def cooking_menu(service_type):
