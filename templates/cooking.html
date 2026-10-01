@@ -13,14 +13,12 @@
 
     <div class="container">
 
-        <!-- Breadcrumb -->
         <div class="cooking-breadcrumb">
             <a href="{{ url_for('home') }}">Home</a>
             <span>›</span>
             <span>Cooking Services</span>
         </div>
 
-        <!-- Header -->
         <div class="cooking-header">
 
             <div class="cooking-header-icon">
@@ -29,23 +27,21 @@
 
             <div>
                 <h1>Cooking Services</h1>
-                <p>
-                    Choose how you want to enjoy your food.
-                </p>
+                <p>Choose how you want to enjoy your food.</p>
             </div>
 
         </div>
 
-        <!-- Title -->
         <div class="cooking-title-row">
             <h2>Choose a Service</h2>
             <p>Select an option below to continue.</p>
         </div>
 
-        <!-- Options -->
+
         <div class="cooking-options">
 
-            <!-- Prepare Food At Home -->
+            <!-- PREPARE FOOD AT HOME -->
+
             <div class="cooking-card">
 
                 <div class="cooking-card-icon">
@@ -66,13 +62,16 @@
                     <span>Custom Menu</span>
                 </div>
 
-                <a href="#" class="cooking-btn">
+                <a href="{{ url_for('cooking_menu', service_type='home') }}"
+                   class="cooking-btn">
                     Continue →
                 </a>
 
             </div>
 
-            <!-- Food Delivery -->
+
+            <!-- FOOD DELIVERY -->
+
             <div class="cooking-card delivery">
 
                 <div class="cooking-card-icon">
@@ -92,7 +91,8 @@
                     <span>Order Online</span>
                 </div>
 
-                <a href="#" class="cooking-btn">
+                <a href="{{ url_for('cooking_menu', service_type='delivery') }}"
+                   class="cooking-btn">
                     Continue →
                 </a>
 
@@ -100,7 +100,6 @@
 
         </div>
 
-        <!-- Information -->
         <div class="cooking-info">
 
             <div class="cooking-info-icon">
@@ -110,8 +109,8 @@
             <div>
                 <h3>Fresh & Reliable Food Service</h3>
                 <p>
-                    Choose your preferred option and continue
-                    to select food items and quantities.
+                    Select your preferred service and choose
+                    food from the available menu.
                 </p>
             </div>
 
