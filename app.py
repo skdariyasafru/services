@@ -16,6 +16,17 @@ def cooking():
 @app.route("/services/electrical")
 def electrical_services():
     return render_template("electrical.html")
+    
+@app.route("/services/cooking/menu/<service_type>")
+def cooking_menu(service_type):
+
+    if service_type not in ["home", "delivery"]:
+        return redirect(url_for("cooking"))
+
+    return render_template(
+        "cooking_menu.html",
+        service_type=service_type
+    )
 
 
 @app.route("/ping")
