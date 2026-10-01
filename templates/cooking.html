@@ -2,24 +2,28 @@
 
 {% block title %}Cooking Services - Service Project{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/cooking.css') }}">
+{% endblock %}
+
 {% block content %}
 
-<section class="electrical-page">
+<section class="cooking-page">
 
     <div class="container">
 
         <!-- Breadcrumb -->
-        <div class="electrical-breadcrumb">
+        <div class="cooking-breadcrumb">
             <a href="{{ url_for('home') }}">Home</a>
             <span>›</span>
             <span>Cooking Services</span>
         </div>
 
+        <!-- Header -->
+        <div class="cooking-header">
 
-        <!-- Page Header -->
-        <div class="electrical-header">
-
-            <div class="electrical-header-icon">
+            <div class="cooking-header-icon">
                 🍳
             </div>
 
@@ -32,50 +36,46 @@
 
         </div>
 
-
         <!-- Title -->
-        <div class="electrical-title-row">
+        <div class="cooking-title-row">
             <h2>Choose a Service</h2>
-            <p>
-                Select an option below to continue.
-            </p>
+            <p>Select an option below to continue.</p>
         </div>
 
+        <!-- Options -->
+        <div class="cooking-options">
 
-        <!-- Cooking Options -->
-        <div class="electrical-service-grid">
+            <!-- Prepare Food At Home -->
+            <div class="cooking-card">
 
-
-            <!-- OPTION 1 -->
-            <div class="electrical-service-card">
-
-                <div class="electrical-service-icon">
+                <div class="cooking-card-icon">
                     🍳
                 </div>
 
                 <h3>Prepare Food at Home</h3>
 
                 <p>
-                    Book a cook to come to your home and prepare
-                    fresh food according to your requirements.
+                    Book a cook to come to your home and
+                    prepare fresh food according to your
+                    requirements.
                 </p>
 
-                <div class="electrical-tags">
+                <div class="cooking-tags">
                     <span>Home Cook</span>
                     <span>Fresh Food</span>
+                    <span>Custom Menu</span>
                 </div>
 
-                <a href="#" class="electrical-book-btn">
+                <a href="#" class="cooking-btn">
                     Continue →
                 </a>
 
             </div>
 
+            <!-- Food Delivery -->
+            <div class="cooking-card delivery">
 
-            <!-- OPTION 2 -->
-            <div class="electrical-service-card">
-
-                <div class="electrical-service-icon">
+                <div class="cooking-card-icon">
                     🥡
                 </div>
 
@@ -86,17 +86,34 @@
                     delivered conveniently to your doorstep.
                 </p>
 
-                <div class="electrical-tags">
+                <div class="cooking-tags">
                     <span>Fresh Food</span>
-                    <span>Delivery</span>
+                    <span>Home Delivery</span>
+                    <span>Order Online</span>
                 </div>
 
-                <a href="#" class="electrical-book-btn">
+                <a href="#" class="cooking-btn">
                     Continue →
                 </a>
 
             </div>
 
+        </div>
+
+        <!-- Information -->
+        <div class="cooking-info">
+
+            <div class="cooking-info-icon">
+                ✓
+            </div>
+
+            <div>
+                <h3>Fresh & Reliable Food Service</h3>
+                <p>
+                    Choose your preferred option and continue
+                    to select food items and quantities.
+                </p>
+            </div>
 
         </div>
 
