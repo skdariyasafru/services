@@ -1,534 +1,61 @@
-{% extends "base.html" %}
+from flask import Blueprint, render_template, redirect, url_for, request, session
 
-{% block title %}Food Menu - Service Project{% endblock %}
+cart_bp = Blueprint("cart", __name__)
 
-{% block content %}
 
-<section class="cooking-menu-page">
+@cart_bp.route("/cart")
+def cart():
 
-    <div class="container">
+    cart_items = session.get("cart", [])
 
-        <!-- Breadcrumb -->
-        <div class="cooking-breadcrumb">
-            <a href="{{ url_for('home.home') }}">Home</a>
-            <span>›</span>
+    total = sum(
+        item["price"] * item["quantity"]
+        for item in cart_items
+    )
 
-            <a href="{{ url_for('cooking.cooking') }}">Cooking</a>
-            <span>›</span>
+    return render_template(
+        "cart.html",
+        cart_items=cart_items,
+        total=total
+    )
 
-            <span>Food Menu</span>
-        </div>
 
+@cart_bp.route("/cart/add", methods=["POST"])
+def add_to_cart():
 
-        <!-- PAGE HEADER -->
-        <div class="cooking-menu-header">
+    service_type = request.form.get("service_type")
+    item_name = request.form.get("item_name")
+    price = int(request.form.get("price"))
 
-            <div class="cooking-menu-icon">
-                🍳
-            </div>
+    cart = session.get("cart", [])
 
-            <div>
+    # Check whether item already exists
+    for item in cart:
 
-                {% if service_type == "home" %}
+        if (
+            item["name"] == item_name
+            and item["service_type"] == service_type
+        ):
 
-                    <div class="cooking-label">
-                        HOME COOKING
-                    </div>
+            item["quantity"] += 1
+            break
 
-                    <h1>Choose Food to Prepare</h1>
+    else:
 
-                    <p>
-                        Select the dishes you want prepared at your home.
-                    </p>
+        cart.append({
+            "name": item_name,
+            "price": price,
+            "quantity": 1,
+            "service_type": service_type
+        })
 
-                {% else %}
+    session["cart"] = cart
+    session.modified = True
 
-                    <div class="cooking-label">
-                        FOOD DELIVERY
-                    </div>
-
-                    <h1>Choose Your Food</h1>
-
-                    <p>
-                        Select your food and add it to your cart.
-                    </p>
-
-                {% endif %}
-
-            </div>
-
-        </div>
-
-
-        <!-- MENU TITLE -->
-        <div class="cooking-menu-title">
-
-            <div>
-                <div class="section-label">
-                    FOOD MENU
-                </div>
-
-                <h2>
-                    Popular Dishes
-                </h2>
-
-                <p>
-                    Choose your dishes and add them to your cart.
-                </p>
-            </div>
-
-
-            <!-- REAL CART -->
-            <a href="{{ url_for('cart.cart') }}"
-               class="cooking-cart-button">
-
-                🛒 Cart
-
-                {% if session.get('cart') %}
-                    <span class="cart-count">
-                        {{ session.get('cart')|sum(attribute='quantity') }}
-                    </span>
-                {% else %}
-                    <span class="cart-count">
-                        0
-                    </span>
-                {% endif %}
-
-            </a>
-
-        </div>
-
-
-        <!-- FOOD GRID -->
-        <div class="cooking-food-grid">
-
-
-            <!-- CHICKEN BIRYANI -->
-            <div class="cooking-food-card">
-
-                <div class="food-image">
-                    🍛
-                </div>
-
-                <div class="food-details">
-
-                    <h3>
-                        Chicken Biryani
-                    </h3>
-
-                    <p>
-                        Fragrant basmati rice with chicken and
-                        traditional spices.
-                    </p>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            ₹100
-                        </strong>
-
-                        <form method="POST"
-                              action="{{ url_for('cart.add_to_cart') }}">
-
-                            <input type="hidden"
-                                   name="service_type"
-                                   value="{{ service_type }}">
-
-                            <input type="hidden"
-                                   name="item_name"
-                                   value="Chicken Biryani">
-
-                            <input type="hidden"
-                                   name="price"
-                                   value="100">
-
-                            <button type="submit"
-                                    class="add-cart-btn">
-                                + Add
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- VEG BIRYANI -->
-            <div class="cooking-food-card">
-
-                <div class="food-image">
-                    🍚
-                </div>
-
-                <div class="food-details">
-
-                    <h3>
-                        Veg Biryani
-                    </h3>
-
-                    <p>
-                        Flavourful basmati rice with fresh vegetables
-                        and spices.
-                    </p>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            ₹80
-                        </strong>
-
-                        <form method="POST"
-                              action="{{ url_for('cart.add_to_cart') }}">
-
-                            <input type="hidden"
-                                   name="service_type"
-                                   value="{{ service_type }}">
-
-                            <input type="hidden"
-                                   name="item_name"
-                                   value="Veg Biryani">
-
-                            <input type="hidden"
-                                   name="price"
-                                   value="80">
-
-                            <button type="submit"
-                                    class="add-cart-btn">
-                                + Add
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- CHICKEN CURRY -->
-            <div class="cooking-food-card">
-
-                <div class="food-image">
-                    🍗
-                </div>
-
-                <div class="food-details">
-
-                    <h3>
-                        Chicken Curry
-                    </h3>
-
-                    <p>
-                        Traditional chicken curry prepared with
-                        Indian spices.
-                    </p>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            ₹120
-                        </strong>
-
-                        <form method="POST"
-                              action="{{ url_for('cart.add_to_cart') }}">
-
-                            <input type="hidden"
-                                   name="service_type"
-                                   value="{{ service_type }}">
-
-                            <input type="hidden"
-                                   name="item_name"
-                                   value="Chicken Curry">
-
-                            <input type="hidden"
-                                   name="price"
-                                   value="120">
-
-                            <button type="submit"
-                                    class="add-cart-btn">
-                                + Add
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PANEER -->
-            <div class="cooking-food-card">
-
-                <div class="food-image">
-                    🥘
-                </div>
-
-                <div class="food-details">
-
-                    <h3>
-                        Paneer Curry
-                    </h3>
-
-                    <p>
-                        Soft paneer cooked in a rich and tasty
-                        Indian gravy.
-                    </p>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            ₹100
-                        </strong>
-
-                        <form method="POST"
-                              action="{{ url_for('cart.add_to_cart') }}">
-
-                            <input type="hidden"
-                                   name="service_type"
-                                   value="{{ service_type }}">
-
-                            <input type="hidden"
-                                   name="item_name"
-                                   value="Paneer Curry">
-
-                            <input type="hidden"
-                                   name="price"
-                                   value="100">
-
-                            <button type="submit"
-                                    class="add-cart-btn">
-                                + Add
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- SAMBAR -->
-            <div class="cooking-food-card">
-
-                <div class="food-image">
-                    🍲
-                </div>
-
-                <div class="food-details">
-
-                    <h3>
-                        Sambar
-                    </h3>
-
-                    <p>
-                        South Indian style vegetable sambar
-                        with lentils and spices.
-                    </p>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            ₹60
-                        </strong>
-
-                        <form method="POST"
-                              action="{{ url_for('cart.add_to_cart') }}">
-
-                            <input type="hidden"
-                                   name="service_type"
-                                   value="{{ service_type }}">
-
-                            <input type="hidden"
-                                   name="item_name"
-                                   value="Sambar">
-
-                            <input type="hidden"
-                                   name="price"
-                                   value="60">
-
-                            <button type="submit"
-                                    class="add-cart-btn">
-                                + Add
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- DAL -->
-            <div class="cooking-food-card">
-
-                <div class="food-image">
-                    🥣
-                </div>
-
-                <div class="food-details">
-
-                    <h3>
-                        Dal Fry
-                    </h3>
-
-                    <p>
-                        Yellow dal cooked with onion, tomato
-                        and Indian spices.
-                    </p>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            ₹70
-                        </strong>
-
-                        <form method="POST"
-                              action="{{ url_for('cart.add_to_cart') }}">
-
-                            <input type="hidden"
-                                   name="service_type"
-                                   value="{{ service_type }}">
-
-                            <input type="hidden"
-                                   name="item_name"
-                                   value="Dal Fry">
-
-                            <input type="hidden"
-                                   name="price"
-                                   value="70">
-
-                            <button type="submit"
-                                    class="add-cart-btn">
-                                + Add
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- CHAPATI -->
-            <div class="cooking-food-card">
-
-                <div class="food-image">
-                    🫓
-                </div>
-
-                <div class="food-details">
-
-                    <h3>
-                        Chapati
-                    </h3>
-
-                    <p>
-                        Fresh soft chapati prepared with
-                        whole wheat flour.
-                    </p>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            ₹15
-                        </strong>
-
-                        <form method="POST"
-                              action="{{ url_for('cart.add_to_cart') }}">
-
-                            <input type="hidden"
-                                   name="service_type"
-                                   value="{{ service_type }}">
-
-                            <input type="hidden"
-                                   name="item_name"
-                                   value="Chapati">
-
-                            <input type="hidden"
-                                   name="price"
-                                   value="15">
-
-                            <button type="submit"
-                                    class="add-cart-btn">
-                                + Add
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- RICE -->
-            <div class="cooking-food-card">
-
-                <div class="food-image">
-                    🍚
-                </div>
-
-                <div class="food-details">
-
-                    <h3>
-                        Plain Rice
-                    </h3>
-
-                    <p>
-                        Freshly cooked steamed rice.
-                    </p>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            ₹50
-                        </strong>
-
-                        <form method="POST"
-                              action="{{ url_for('cart.add_to_cart') }}">
-
-                            <input type="hidden"
-                                   name="service_type"
-                                   value="{{ service_type }}">
-
-                            <input type="hidden"
-                                   name="item_name"
-                                   value="Plain Rice">
-
-                            <input type="hidden"
-                                   name="price"
-                                   value="50">
-
-                            <button type="submit"
-                                    class="add-cart-btn">
-                                + Add
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-{% endblock %}
+    # Return to the same menu
+    return redirect(
+        url_for(
+            "cooking.cooking_menu",
+            service_type=service_type
+        )
+    )
