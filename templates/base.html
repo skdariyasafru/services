@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,19 +17,18 @@
     {% block extra_css %}{% endblock %}
 </head>
 
-
 <body>
 
-<!-- =========================================================
+<!-- =====================================================
      HEADER
-========================================================= -->
+===================================================== -->
 
 <header class="site-header">
 
     <div class="container header-inner">
 
         <!-- BRAND -->
-        <a href="{{ url_for('home.home') }}" class="brand">
+        <a href="{{ url_for('home') }}" class="brand">
 
             <div class="brand-icon">
                 🛠
@@ -54,24 +52,28 @@
         <!-- NAVIGATION -->
         <nav class="main-nav">
 
-            <a href="{{ url_for('home.home') }}"
-               class="nav-link active">
+            <a href="{{ url_for('home') }}"
+               class="nav-link">
                 Home
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="{{ url_for('home') }}"
+               class="nav-link">
                 Services
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="#"
+               class="nav-link">
                 My Bookings
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="#"
+               class="nav-link">
                 About
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="#"
+               class="nav-link">
                 Contact
             </a>
 
@@ -83,23 +85,14 @@
 
             <!-- LOCATION -->
             <button class="location-btn" type="button">
-
                 <span>📍</span>
                 <span>Guntur</span>
                 <span>⌄</span>
-
             </button>
 
 
-            <!-- LOGIN -->
-            <a href="#" class="nav-login">
-                <span>♙</span>
-                Login
-            </a>
-
-
             <!-- CART -->
-            <a href="{{ url_for('cart.cart') }}"
+            <a href="{{ url_for('cart') }}"
                class="header-cart">
 
                 <span class="cart-icon">
@@ -111,17 +104,25 @@
                 </span>
 
                 {% if session.get('cart') %}
-
                     <span class="cart-badge">
                         {{ session.get('cart')|length }}
                     </span>
-
                 {% endif %}
 
             </a>
 
 
-            <!-- REGISTER -->
+            <!-- LOGIN
+                 Keep as placeholder until login route is created -->
+            <a href="#"
+               class="nav-login">
+                <span>♙</span>
+                Login
+            </a>
+
+
+            <!-- REGISTER
+                 Keep as placeholder until register route is created -->
             <a href="#"
                class="register-btn">
                 Register
@@ -134,14 +135,13 @@
 </header>
 
 
-<!-- =========================================================
+<!-- =====================================================
      SEARCH
-========================================================= -->
+===================================================== -->
 
 <section class="search-section">
 
     <div class="container search-container">
-
 
         <!-- CATEGORY -->
         <button class="category-button"
@@ -162,7 +162,7 @@
         </button>
 
 
-        <!-- SEARCH INPUT -->
+        <!-- SEARCH BOX -->
         <div class="search-wrapper">
 
             <span class="search-icon">
@@ -200,9 +200,9 @@
 </section>
 
 
-<!-- =========================================================
+<!-- =====================================================
      MAIN CONTENT
-========================================================= -->
+===================================================== -->
 
 <main>
 
@@ -212,19 +212,19 @@
 </main>
 
 
-<!-- =========================================================
+<!-- =====================================================
      FOOTER
-========================================================= -->
+===================================================== -->
 
 <footer class="site-footer">
 
     <div class="container footer-grid">
 
 
-        <!-- FOOTER BRAND -->
+        <!-- BRAND -->
         <div class="footer-brand">
 
-            <a href="{{ url_for('home.home') }}"
+            <a href="{{ url_for('home') }}"
                class="footer-logo">
 
                 <span class="footer-logo-icon">
@@ -245,21 +245,10 @@
 
             <div class="social-links">
 
-                <a href="#" aria-label="Facebook">
-                    f
-                </a>
-
-                <a href="#" aria-label="Instagram">
-                    ◎
-                </a>
-
-                <a href="#" aria-label="YouTube">
-                    ▶
-                </a>
-
-                <a href="#" aria-label="Twitter">
-                    ♥
-                </a>
+                <a href="#">f</a>
+                <a href="#">◎</a>
+                <a href="#">▶</a>
+                <a href="#">♥</a>
 
             </div>
 
@@ -273,24 +262,24 @@
                 Quick Links
             </h3>
 
-            <a href="{{ url_for('home.home') }}">
+            <a href="{{ url_for('home') }}">
                 Home
             </a>
 
-            <a href="#">
-                Services
+            <a href="{{ url_for('cooking') }}">
+                Cooking
+            </a>
+
+            <a href="{{ url_for('electrical_services') }}">
+                Electrical
+            </a>
+
+            <a href="{{ url_for('cart') }}">
+                Cart
             </a>
 
             <a href="#">
                 My Bookings
-            </a>
-
-            <a href="#">
-                About Us
-            </a>
-
-            <a href="#">
-                Contact
             </a>
 
         </div>
@@ -351,7 +340,7 @@
         </div>
 
 
-        <!-- FOLLOW -->
+        <!-- SOCIAL -->
         <div class="footer-column follow-column">
 
             <h3>
@@ -378,7 +367,8 @@
         <div class="container footer-bottom-inner">
 
             <span>
-                © 2026 Service Project. All rights reserved.
+                © 2026 Service Project.
+                All rights reserved.
             </span>
 
             <span>
@@ -392,11 +382,12 @@
 </footer>
 
 
-<!-- =========================================================
+<!-- =====================================================
      JAVASCRIPT
-========================================================= -->
+===================================================== -->
 
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}">
+</script>
 
 {% block extra_js %}
 {% endblock %}
