@@ -1831,3 +1831,325 @@ input {
 .service-card:hover .service-card-link {
     text-decoration: underline;
 }
+
+/* =====================================================
+   COOKING MENU
+===================================================== */
+
+.cooking-menu-page {
+    background: #f6f8fc;
+    padding: 28px 0 60px;
+    min-height: 600px;
+}
+
+.cooking-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 22px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.cooking-breadcrumb a {
+    color: #1769e0;
+    text-decoration: none;
+}
+
+.cooking-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+
+/* HEADER */
+
+.cooking-menu-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 24px;
+
+    background: linear-gradient(
+        135deg,
+        #eef6ff,
+        #e7f0ff
+    );
+
+    border: 1px solid #d9e6f7;
+    border-radius: 14px;
+
+    margin-bottom: 32px;
+}
+
+.cooking-menu-icon {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    border-radius: 14px;
+
+    font-size: 32px;
+
+    box-shadow: 0 5px 18px rgba(30, 80, 140, 0.08);
+}
+
+.cooking-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1769e0;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.cooking-menu-header h1 {
+    margin: 0 0 5px;
+    color: #102a43;
+    font-size: 30px;
+}
+
+.cooking-menu-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 15px;
+}
+
+
+/* TITLE */
+
+.cooking-menu-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #1769e0;
+    margin-bottom: 5px;
+}
+
+.cooking-menu-title h2 {
+    margin: 0 0 5px;
+    font-size: 24px;
+    color: #102a43;
+}
+
+.cooking-menu-title p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* CART BUTTON */
+
+.cooking-cart-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 11px 18px;
+
+    background: #1769e0;
+    color: white;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+    font-weight: 700;
+
+    box-shadow: 0 4px 12px rgba(23, 105, 224, 0.20);
+
+    transition: 0.2s ease;
+}
+
+.cooking-cart-button:hover {
+    background: #0d5dcc;
+    transform: translateY(-1px);
+}
+
+.cart-count {
+    min-width: 22px;
+    height: 22px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    color: #1769e0;
+
+    border-radius: 50%;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* FOOD GRID */
+
+.cooking-food-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* FOOD CARD */
+
+.cooking-food-card {
+    background: white;
+
+    border: 1px solid #dce5f0;
+    border-radius: 14px;
+
+    padding: 18px;
+
+    box-shadow:
+        0 4px 14px rgba(30, 60, 90, 0.05);
+
+    transition: 0.2s ease;
+}
+
+.cooking-food-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 25px rgba(30, 60, 90, 0.10);
+
+    border-color: #c8daf2;
+}
+
+
+/* FOOD IMAGE */
+
+.food-image {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f0f6ff;
+
+    border-radius: 12px;
+
+    font-size: 32px;
+
+    margin-bottom: 15px;
+}
+
+
+/* DETAILS */
+
+.food-details h3 {
+    margin: 0 0 7px;
+
+    color: #102a43;
+    font-size: 18px;
+}
+
+.food-details p {
+    min-height: 44px;
+
+    margin: 0 0 16px;
+
+    color: #64748b;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* BOTTOM */
+
+.food-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-top: 14px;
+
+    border-top: 1px solid #edf1f6;
+}
+
+.food-bottom strong {
+    color: #102a43;
+    font-size: 18px;
+}
+
+
+/* ADD BUTTON */
+
+.add-cart-btn {
+    border: none;
+
+    background: #1769e0;
+    color: white;
+
+    padding: 9px 15px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.add-cart-btn:hover {
+    background: #0d5dcc;
+}
+
+.add-cart-btn:active {
+    transform: scale(0.97);
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+    .cooking-food-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .cooking-menu-header {
+        align-items: flex-start;
+    }
+
+    .cooking-menu-header h1 {
+        font-size: 24px;
+    }
+
+    .cooking-menu-title {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .cooking-food-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
