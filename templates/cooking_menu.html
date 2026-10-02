@@ -12,13 +12,15 @@
         <div class="cooking-breadcrumb">
             <a href="{{ url_for('home.home') }}">Home</a>
             <span>›</span>
+
             <a href="{{ url_for('cooking.cooking') }}">Cooking</a>
             <span>›</span>
+
             <span>Food Menu</span>
         </div>
 
 
-        <!-- Header -->
+        <!-- PAGE HEADER -->
         <div class="cooking-menu-header">
 
             <div class="cooking-menu-icon">
@@ -26,39 +28,82 @@
             </div>
 
             <div>
+
                 {% if service_type == "home" %}
-                    <div class="cooking-label">HOME COOKING</div>
+
+                    <div class="cooking-label">
+                        HOME COOKING
+                    </div>
+
                     <h1>Choose Food to Prepare</h1>
-                    <p>Select the dishes you want prepared at your home.</p>
+
+                    <p>
+                        Select the dishes you want prepared at your home.
+                    </p>
+
                 {% else %}
-                    <div class="cooking-label">FOOD DELIVERY</div>
+
+                    <div class="cooking-label">
+                        FOOD DELIVERY
+                    </div>
+
                     <h1>Choose Your Food</h1>
-                    <p>Select your food and add it to your cart.</p>
+
+                    <p>
+                        Select your food and add it to your cart.
+                    </p>
+
                 {% endif %}
+
             </div>
 
         </div>
 
 
-        <!-- Menu Heading -->
+        <!-- MENU TITLE -->
         <div class="cooking-menu-title">
+
             <div>
-                <div class="section-label">FOOD MENU</div>
-                <h2>Popular Dishes</h2>
-                <p>Choose your dishes and add them to your cart.</p>
+                <div class="section-label">
+                    FOOD MENU
+                </div>
+
+                <h2>
+                    Popular Dishes
+                </h2>
+
+                <p>
+                    Choose your dishes and add them to your cart.
+                </p>
             </div>
 
-            <a href="#" class="cooking-cart-button">
-                🛒 Cart <span id="cartCount">0</span>
+
+            <!-- REAL CART -->
+            <a href="{{ url_for('cart.cart') }}"
+               class="cooking-cart-button">
+
+                🛒 Cart
+
+                {% if session.get('cart') %}
+                    <span class="cart-count">
+                        {{ session.get('cart')|sum(attribute='quantity') }}
+                    </span>
+                {% else %}
+                    <span class="cart-count">
+                        0
+                    </span>
+                {% endif %}
+
             </a>
+
         </div>
 
 
-        <!-- Food Grid -->
+        <!-- FOOD GRID -->
         <div class="cooking-food-grid">
 
 
-            <!-- Biryani -->
+            <!-- CHICKEN BIRYANI -->
             <div class="cooking-food-card">
 
                 <div class="food-image">
@@ -67,7 +112,9 @@
 
                 <div class="food-details">
 
-                    <h3>Chicken Biryani</h3>
+                    <h3>
+                        Chicken Biryani
+                    </h3>
 
                     <p>
                         Fragrant basmati rice with chicken and
@@ -76,14 +123,31 @@
 
                     <div class="food-bottom">
 
-                        <strong>₹100</strong>
+                        <strong>
+                            ₹100
+                        </strong>
 
-                        <button
-                            type="button"
-                            class="add-cart-btn"
-                            onclick="addToCart('Chicken Biryani', 100)">
-                            + Add
-                        </button>
+                        <form method="POST"
+                              action="{{ url_for('cart.add_to_cart') }}">
+
+                            <input type="hidden"
+                                   name="service_type"
+                                   value="{{ service_type }}">
+
+                            <input type="hidden"
+                                   name="item_name"
+                                   value="Chicken Biryani">
+
+                            <input type="hidden"
+                                   name="price"
+                                   value="100">
+
+                            <button type="submit"
+                                    class="add-cart-btn">
+                                + Add
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -92,7 +156,7 @@
             </div>
 
 
-            <!-- Veg Biryani -->
+            <!-- VEG BIRYANI -->
             <div class="cooking-food-card">
 
                 <div class="food-image">
@@ -101,7 +165,9 @@
 
                 <div class="food-details">
 
-                    <h3>Veg Biryani</h3>
+                    <h3>
+                        Veg Biryani
+                    </h3>
 
                     <p>
                         Flavourful basmati rice with fresh vegetables
@@ -110,14 +176,31 @@
 
                     <div class="food-bottom">
 
-                        <strong>₹80</strong>
+                        <strong>
+                            ₹80
+                        </strong>
 
-                        <button
-                            type="button"
-                            class="add-cart-btn"
-                            onclick="addToCart('Veg Biryani', 80)">
-                            + Add
-                        </button>
+                        <form method="POST"
+                              action="{{ url_for('cart.add_to_cart') }}">
+
+                            <input type="hidden"
+                                   name="service_type"
+                                   value="{{ service_type }}">
+
+                            <input type="hidden"
+                                   name="item_name"
+                                   value="Veg Biryani">
+
+                            <input type="hidden"
+                                   name="price"
+                                   value="80">
+
+                            <button type="submit"
+                                    class="add-cart-btn">
+                                + Add
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -126,7 +209,7 @@
             </div>
 
 
-            <!-- Chicken Curry -->
+            <!-- CHICKEN CURRY -->
             <div class="cooking-food-card">
 
                 <div class="food-image">
@@ -135,7 +218,9 @@
 
                 <div class="food-details">
 
-                    <h3>Chicken Curry</h3>
+                    <h3>
+                        Chicken Curry
+                    </h3>
 
                     <p>
                         Traditional chicken curry prepared with
@@ -144,14 +229,31 @@
 
                     <div class="food-bottom">
 
-                        <strong>₹120</strong>
+                        <strong>
+                            ₹120
+                        </strong>
 
-                        <button
-                            type="button"
-                            class="add-cart-btn"
-                            onclick="addToCart('Chicken Curry', 120)">
-                            + Add
-                        </button>
+                        <form method="POST"
+                              action="{{ url_for('cart.add_to_cart') }}">
+
+                            <input type="hidden"
+                                   name="service_type"
+                                   value="{{ service_type }}">
+
+                            <input type="hidden"
+                                   name="item_name"
+                                   value="Chicken Curry">
+
+                            <input type="hidden"
+                                   name="price"
+                                   value="120">
+
+                            <button type="submit"
+                                    class="add-cart-btn">
+                                + Add
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -160,7 +262,7 @@
             </div>
 
 
-            <!-- Paneer Curry -->
+            <!-- PANEER -->
             <div class="cooking-food-card">
 
                 <div class="food-image">
@@ -169,7 +271,9 @@
 
                 <div class="food-details">
 
-                    <h3>Paneer Curry</h3>
+                    <h3>
+                        Paneer Curry
+                    </h3>
 
                     <p>
                         Soft paneer cooked in a rich and tasty
@@ -178,14 +282,31 @@
 
                     <div class="food-bottom">
 
-                        <strong>₹100</strong>
+                        <strong>
+                            ₹100
+                        </strong>
 
-                        <button
-                            type="button"
-                            class="add-cart-btn"
-                            onclick="addToCart('Paneer Curry', 100)">
-                            + Add
-                        </button>
+                        <form method="POST"
+                              action="{{ url_for('cart.add_to_cart') }}">
+
+                            <input type="hidden"
+                                   name="service_type"
+                                   value="{{ service_type }}">
+
+                            <input type="hidden"
+                                   name="item_name"
+                                   value="Paneer Curry">
+
+                            <input type="hidden"
+                                   name="price"
+                                   value="100">
+
+                            <button type="submit"
+                                    class="add-cart-btn">
+                                + Add
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -194,7 +315,7 @@
             </div>
 
 
-            <!-- Sambar -->
+            <!-- SAMBAR -->
             <div class="cooking-food-card">
 
                 <div class="food-image">
@@ -203,7 +324,9 @@
 
                 <div class="food-details">
 
-                    <h3>Sambar</h3>
+                    <h3>
+                        Sambar
+                    </h3>
 
                     <p>
                         South Indian style vegetable sambar
@@ -212,14 +335,31 @@
 
                     <div class="food-bottom">
 
-                        <strong>₹60</strong>
+                        <strong>
+                            ₹60
+                        </strong>
 
-                        <button
-                            type="button"
-                            class="add-cart-btn"
-                            onclick="addToCart('Sambar', 60)">
-                            + Add
-                        </button>
+                        <form method="POST"
+                              action="{{ url_for('cart.add_to_cart') }}">
+
+                            <input type="hidden"
+                                   name="service_type"
+                                   value="{{ service_type }}">
+
+                            <input type="hidden"
+                                   name="item_name"
+                                   value="Sambar">
+
+                            <input type="hidden"
+                                   name="price"
+                                   value="60">
+
+                            <button type="submit"
+                                    class="add-cart-btn">
+                                + Add
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -228,7 +368,7 @@
             </div>
 
 
-            <!-- Dal Fry -->
+            <!-- DAL -->
             <div class="cooking-food-card">
 
                 <div class="food-image">
@@ -237,7 +377,9 @@
 
                 <div class="food-details">
 
-                    <h3>Dal Fry</h3>
+                    <h3>
+                        Dal Fry
+                    </h3>
 
                     <p>
                         Yellow dal cooked with onion, tomato
@@ -246,14 +388,31 @@
 
                     <div class="food-bottom">
 
-                        <strong>₹70</strong>
+                        <strong>
+                            ₹70
+                        </strong>
 
-                        <button
-                            type="button"
-                            class="add-cart-btn"
-                            onclick="addToCart('Dal Fry', 70)">
-                            + Add
-                        </button>
+                        <form method="POST"
+                              action="{{ url_for('cart.add_to_cart') }}">
+
+                            <input type="hidden"
+                                   name="service_type"
+                                   value="{{ service_type }}">
+
+                            <input type="hidden"
+                                   name="item_name"
+                                   value="Dal Fry">
+
+                            <input type="hidden"
+                                   name="price"
+                                   value="70">
+
+                            <button type="submit"
+                                    class="add-cart-btn">
+                                + Add
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -262,7 +421,7 @@
             </div>
 
 
-            <!-- Chapati -->
+            <!-- CHAPATI -->
             <div class="cooking-food-card">
 
                 <div class="food-image">
@@ -271,7 +430,9 @@
 
                 <div class="food-details">
 
-                    <h3>Chapati</h3>
+                    <h3>
+                        Chapati
+                    </h3>
 
                     <p>
                         Fresh soft chapati prepared with
@@ -280,14 +441,31 @@
 
                     <div class="food-bottom">
 
-                        <strong>₹15</strong>
+                        <strong>
+                            ₹15
+                        </strong>
 
-                        <button
-                            type="button"
-                            class="add-cart-btn"
-                            onclick="addToCart('Chapati', 15)">
-                            + Add
-                        </button>
+                        <form method="POST"
+                              action="{{ url_for('cart.add_to_cart') }}">
+
+                            <input type="hidden"
+                                   name="service_type"
+                                   value="{{ service_type }}">
+
+                            <input type="hidden"
+                                   name="item_name"
+                                   value="Chapati">
+
+                            <input type="hidden"
+                                   name="price"
+                                   value="15">
+
+                            <button type="submit"
+                                    class="add-cart-btn">
+                                + Add
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -296,7 +474,7 @@
             </div>
 
 
-            <!-- Rice -->
+            <!-- RICE -->
             <div class="cooking-food-card">
 
                 <div class="food-image">
@@ -305,7 +483,9 @@
 
                 <div class="food-details">
 
-                    <h3>Plain Rice</h3>
+                    <h3>
+                        Plain Rice
+                    </h3>
 
                     <p>
                         Freshly cooked steamed rice.
@@ -313,14 +493,31 @@
 
                     <div class="food-bottom">
 
-                        <strong>₹50</strong>
+                        <strong>
+                            ₹50
+                        </strong>
 
-                        <button
-                            type="button"
-                            class="add-cart-btn"
-                            onclick="addToCart('Plain Rice', 50)">
-                            + Add
-                        </button>
+                        <form method="POST"
+                              action="{{ url_for('cart.add_to_cart') }}">
+
+                            <input type="hidden"
+                                   name="service_type"
+                                   value="{{ service_type }}">
+
+                            <input type="hidden"
+                                   name="item_name"
+                                   value="Plain Rice">
+
+                            <input type="hidden"
+                                   name="price"
+                                   value="50">
+
+                            <button type="submit"
+                                    class="add-cart-btn">
+                                + Add
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -333,21 +530,5 @@
     </div>
 
 </section>
-
-
-<script>
-
-let cartCount = 0;
-
-function addToCart(name, price) {
-
-    cartCount++;
-
-    document.getElementById("cartCount").textContent = cartCount;
-
-    alert(name + " added to cart - ₹" + price);
-}
-
-</script>
 
 {% endblock %}
