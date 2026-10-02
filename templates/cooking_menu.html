@@ -1,61 +1,1038 @@
-from flask import Blueprint, render_template, redirect, url_for, request, session
+{% extends "base.html" %}
 
-cart_bp = Blueprint("cart", __name__)
-
-
-@cart_bp.route("/cart")
-def cart():
-
-    cart_items = session.get("cart", [])
-
-    total = sum(
-        item["price"] * item["quantity"]
-        for item in cart_items
-    )
-
-    return render_template(
-        "cart.html",
-        cart_items=cart_items,
-        total=total
-    )
+{% block title %}Food Menu - Service Project{% endblock %}
 
 
-@cart_bp.route("/cart/add", methods=["POST"])
-def add_to_cart():
+{% block extra_css %}
 
-    service_type = request.form.get("service_type")
-    item_name = request.form.get("item_name")
-    price = int(request.form.get("price"))
+<style>
 
-    cart = session.get("cart", [])
+/* =========================================
+   COOKING MENU PAGE
+========================================= */
 
-    # Check whether item already exists
-    for item in cart:
+.cooking-menu-page {
+    padding: 28px 0 60px;
+    background: #f7f9fc;
+    min-height: 650px;
+}
 
-        if (
-            item["name"] == item_name
-            and item["service_type"] == service_type
-        ):
 
-            item["quantity"] += 1
-            break
+/* =========================================
+   BREADCRUMB
+========================================= */
 
-    else:
+.cooking-menu-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-        cart.append({
-            "name": item_name,
-            "price": price,
-            "quantity": 1,
-            "service_type": service_type
-        })
+    margin-bottom: 20px;
 
-    session["cart"] = cart
-    session.modified = True
+    font-size: 14px;
+    color: #64748b;
+}
 
-    # Return to the same menu
-    return redirect(
-        url_for(
-            "cooking.cooking_menu",
-            service_type=service_type
-        )
-    )
+.cooking-menu-breadcrumb a {
+    color: #1769e0;
+    text-decoration: none;
+}
+
+.cooking-menu-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.cooking-menu-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 22px;
+
+    margin-bottom: 28px;
+
+    background: linear-gradient(
+        135deg,
+        #eef6ff,
+        #e5f0ff
+    );
+
+    border: 1px solid #d7e5f7;
+
+    border-radius: 14px;
+}
+
+.cooking-menu-icon {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #fff3d6;
+
+    border-radius: 14px;
+
+    font-size: 30px;
+}
+
+.cooking-label {
+    margin-bottom: 4px;
+
+    color: #1769e0;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+.cooking-menu-header h1 {
+    margin: 0 0 5px;
+
+    color: #102a56;
+
+    font-size: 32px;
+
+    font-weight: 800;
+}
+
+.cooking-menu-header p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   MENU TITLE
+========================================= */
+
+.cooking-menu-title {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+}
+
+.section-label {
+    margin-bottom: 5px;
+
+    color: #1769e0;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+.cooking-menu-title h2 {
+    margin: 0 0 5px;
+
+    color: #102a56;
+
+    font-size: 24px;
+
+    font-weight: 800;
+}
+
+.cooking-menu-title p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CART BUTTON
+========================================= */
+
+.cooking-cart-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-width: 120px;
+
+    padding: 11px 18px;
+
+    background: #1769e0;
+
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow: 0 4px 10px rgba(23, 105, 224, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cooking-cart-button:hover {
+    background: #0f5bc7;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   FOOD GRID
+========================================= */
+
+.cooking-food-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================
+   FOOD CARD
+========================================= */
+
+.cooking-food-card {
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #dce5f0;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 14px rgba(30, 60, 100, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.cooking-food-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #b9d2f3;
+
+    box-shadow:
+        0 10px 25px rgba(30, 60, 100, 0.10);
+}
+
+
+/* =========================================
+   FOOD IMAGE / ICON
+========================================= */
+
+.food-image {
+    height: 150px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8e8,
+            #f4f8ff
+        );
+
+    font-size: 64px;
+
+    border-bottom: 1px solid #edf1f6;
+}
+
+
+/* =========================================
+   FOOD DETAILS
+========================================= */
+
+.food-details {
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: 17px;
+}
+
+.food-details h3 {
+    margin: 0 0 7px;
+
+    color: #102a56;
+
+    font-size: 18px;
+
+    font-weight: 750;
+}
+
+.food-details p {
+    margin: 0 0 15px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================
+   FOOD BOTTOM
+========================================= */
+
+.food-bottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: auto;
+}
+
+.food-price {
+    color: #102a56;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================
+   ADD BUTTON
+========================================= */
+
+.add-cart-btn {
+    border: none;
+
+    padding: 9px 16px;
+
+    border-radius: 7px;
+
+    background: #1769e0;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.add-cart-btn:hover {
+    background: #0f5bc7;
+
+    transform: translateY(-1px);
+}
+
+.add-cart-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   SERVICE INFORMATION
+========================================= */
+
+.cooking-menu-info {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
+    margin-top: 22px;
+
+    padding: 17px;
+
+    background: #eef7ff;
+
+    border: 1px solid #d2e7fb;
+
+    border-radius: 12px;
+}
+
+.cooking-menu-info-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #1769e0;
+
+    color: #ffffff;
+
+    font-weight: 800;
+}
+
+.cooking-menu-info h3 {
+    margin: 0 0 5px;
+
+    color: #16345f;
+
+    font-size: 16px;
+}
+
+.cooking-menu-info p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .cooking-food-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .cooking-menu-page {
+        padding: 20px 0 40px;
+    }
+
+    .cooking-menu-header {
+        padding: 17px;
+    }
+
+    .cooking-menu-header h1 {
+        font-size: 25px;
+    }
+
+    .cooking-menu-title {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .cooking-cart-button {
+        width: 100%;
+    }
+
+    .cooking-food-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .cooking-menu-header {
+        gap: 12px;
+    }
+
+    .cooking-menu-icon {
+        width: 48px;
+        height: 48px;
+
+        font-size: 24px;
+    }
+
+    .cooking-menu-header h1 {
+        font-size: 22px;
+    }
+
+    .food-image {
+        height: 130px;
+    }
+
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="cooking-menu-page">
+
+    <div class="container">
+
+
+        <!-- =========================================
+             BREADCRUMB
+        ========================================== -->
+
+        <div class="cooking-menu-breadcrumb">
+
+            <a href="{{ url_for('home.home') }}">
+                Home
+            </a>
+
+            <span>›</span>
+
+            <a href="{{ url_for('cooking.cooking') }}">
+                Cooking
+            </a>
+
+            <span>›</span>
+
+            <span>Food Menu</span>
+
+        </div>
+
+
+        <!-- =========================================
+             PAGE HEADER
+        ========================================== -->
+
+        <div class="cooking-menu-header">
+
+            <div class="cooking-menu-icon">
+                🍳
+            </div>
+
+            <div>
+
+                {% if service_type == "home" %}
+
+                    <div class="cooking-label">
+                        HOME COOKING
+                    </div>
+
+                    <h1>
+                        Choose Food to Prepare
+                    </h1>
+
+                    <p>
+                        Select the dishes you want prepared
+                        at your home.
+                    </p>
+
+                {% else %}
+
+                    <div class="cooking-label">
+                        FOOD DELIVERY
+                    </div>
+
+                    <h1>
+                        Choose Your Food
+                    </h1>
+
+                    <p>
+                        Select your food and add it to your cart.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             MENU TITLE
+        ========================================== -->
+
+        <div class="cooking-menu-title">
+
+            <div>
+
+                <div class="section-label">
+                    FOOD MENU
+                </div>
+
+                <h2>
+                    Popular Dishes
+                </h2>
+
+                <p>
+                    Choose your dishes and add them to your cart.
+                </p>
+
+            </div>
+
+
+            <!-- CART -->
+
+            <a
+                href="{{ url_for('cart.cart') }}"
+                class="cooking-cart-button"
+            >
+
+                🛒 Cart
+
+                <span id="cartCount">
+                    {{ session.get('cart', [])|length }}
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- =========================================
+             FOOD GRID
+        ========================================== -->
+
+        <div class="cooking-food-grid">
+
+
+            <!-- CHICKEN BIRYANI -->
+
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍛
+                </div>
+
+                <div class="food-details">
+
+                    <h3>
+                        Chicken Biryani
+                    </h3>
+
+                    <p>
+                        Fragrant basmati rice with chicken
+                        and traditional spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong class="food-price">
+                            ₹100
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'cart.add_to_cart',
+                                service_type=service_type,
+                                item_name='Chicken Biryani',
+                                price=100
+                            ) }}"
+                            class="add-cart-btn"
+                        >
+                            + Add
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- VEG BIRYANI -->
+
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍚
+                </div>
+
+                <div class="food-details">
+
+                    <h3>
+                        Veg Biryani
+                    </h3>
+
+                    <p>
+                        Flavourful basmati rice with fresh
+                        vegetables and spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong class="food-price">
+                            ₹80
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'cart.add_to_cart',
+                                service_type=service_type,
+                                item_name='Veg Biryani',
+                                price=80
+                            ) }}"
+                            class="add-cart-btn"
+                        >
+                            + Add
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHICKEN CURRY -->
+
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍗
+                </div>
+
+                <div class="food-details">
+
+                    <h3>
+                        Chicken Curry
+                    </h3>
+
+                    <p>
+                        Traditional chicken curry prepared
+                        with Indian spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong class="food-price">
+                            ₹120
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'cart.add_to_cart',
+                                service_type=service_type,
+                                item_name='Chicken Curry',
+                                price=120
+                            ) }}"
+                            class="add-cart-btn"
+                        >
+                            + Add
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PANEER CURRY -->
+
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🥘
+                </div>
+
+                <div class="food-details">
+
+                    <h3>
+                        Paneer Curry
+                    </h3>
+
+                    <p>
+                        Soft paneer cooked in a rich and tasty
+                        Indian gravy.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong class="food-price">
+                            ₹100
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'cart.add_to_cart',
+                                service_type=service_type,
+                                item_name='Paneer Curry',
+                                price=100
+                            ) }}"
+                            class="add-cart-btn"
+                        >
+                            + Add
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAMBAR -->
+
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍲
+                </div>
+
+                <div class="food-details">
+
+                    <h3>
+                        Sambar
+                    </h3>
+
+                    <p>
+                        South Indian style vegetable sambar
+                        with lentils and spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong class="food-price">
+                            ₹60
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'cart.add_to_cart',
+                                service_type=service_type,
+                                item_name='Sambar',
+                                price=60
+                            ) }}"
+                            class="add-cart-btn"
+                        >
+                            + Add
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DAL FRY -->
+
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🥣
+                </div>
+
+                <div class="food-details">
+
+                    <h3>
+                        Dal Fry
+                    </h3>
+
+                    <p>
+                        Yellow dal cooked with onion, tomato
+                        and Indian spices.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong class="food-price">
+                            ₹70
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'cart.add_to_cart',
+                                service_type=service_type,
+                                item_name='Dal Fry',
+                                price=70
+                            ) }}"
+                            class="add-cart-btn"
+                        >
+                            + Add
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHAPATI -->
+
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🫓
+                </div>
+
+                <div class="food-details">
+
+                    <h3>
+                        Chapati
+                    </h3>
+
+                    <p>
+                        Fresh soft chapati prepared with
+                        whole wheat flour.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong class="food-price">
+                            ₹15
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'cart.add_to_cart',
+                                service_type=service_type,
+                                item_name='Chapati',
+                                price=15
+                            ) }}"
+                            class="add-cart-btn"
+                        >
+                            + Add
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PLAIN RICE -->
+
+            <div class="cooking-food-card">
+
+                <div class="food-image">
+                    🍚
+                </div>
+
+                <div class="food-details">
+
+                    <h3>
+                        Plain Rice
+                    </h3>
+
+                    <p>
+                        Freshly cooked steamed rice.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <strong class="food-price">
+                            ₹50
+                        </strong>
+
+                        <a
+                            href="{{ url_for(
+                                'cart.add_to_cart',
+                                service_type=service_type,
+                                item_name='Plain Rice',
+                                price=50
+                            ) }}"
+                            class="add-cart-btn"
+                        >
+                            + Add
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             INFORMATION BOX
+        ========================================== -->
+
+        <div class="cooking-menu-info">
+
+            <div class="cooking-menu-info-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Fresh & Reliable Food Service
+                </h3>
+
+                {% if service_type == "home" %}
+
+                    <p>
+                        Select the dishes you want prepared
+                        at your home. Add them to your cart
+                        and continue with your booking.
+                    </p>
+
+                {% else %}
+
+                    <p>
+                        Select your favourite dishes and add
+                        them to your cart. You can review
+                        your order before checkout.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+{% endblock %}
